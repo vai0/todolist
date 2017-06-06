@@ -41,4 +41,11 @@ let todoList = {
   }
 }
 
+// add handlers
+const displayTodosButton = document.getElementById('displayToDos');
+const toggleAllButton = document.getElementById('toggleAll');
+
+displayTodosButton.addEventListener('click', () => todoList.displayToDos());
+toggleAllButton.addEventListener('click', () => todoList.toggleAll());
+
 window.todoList = todoList;
