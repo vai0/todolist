@@ -5,7 +5,27 @@
     <title>Todo List</title>
   </head>
   <body>
-    <button type="button" name="button" id="displayToDos">Display ToDos</button>
-    <button type="button" name="button" id="toggleAll">Toggle All</button>
+    <div class="">
+      <button onclick="handlers.toggleAll()">Toggle All</button>
+    </div>
+    <div class="">
+      <input id="addTodoInput" type="text">
+      <button onclick="handlers.addTodo()">Add</button>
+    </div>
+    <div class="">
+      <input id="changeTodoPositionInput" type="number">
+      <input id="changeTodoTextInput" type="text">
+      <button onclick="handlers.changeTodo()">Change</button>
+    </div>
+    <div class="">
+      <input id="deleteTodoInput" type="number">
+      <button onclick="handlers.deleteTodo()">Delete</button>
+    </div>
+    <div class="">
+      <input id="toggleCompletedInput" type="number">
+      <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+    </div>
+    <ul>
+    </ul>
   </body>
 </html>
