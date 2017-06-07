@@ -1,3 +1,4 @@
+// model
 let todoList = {
   todos: [],
   addTodo(todoText) {
@@ -24,6 +25,7 @@ let todoList = {
   }
 }
 
+// controller
 const handlers = {
   addTodo() {
     const addTodoInput = document.getElementById('addTodoInput');
@@ -39,10 +41,8 @@ const handlers = {
     changeTodoTextInput.value = '';
     view.displayToDos();
   },
-  deleteTodo() {
-    const deleteTodoInput = document.getElementById('deleteTodoInput');
-    todoList.deleteTodo(deleteTodoInput.valueAsNumber);
-    deleteTodoInput.value = '';
+  deleteTodo(position) {
+    todoList.deleteTodo(position);
     view.displayToDos();
   },
   toggleCompleted() {
@@ -57,19 +57,38 @@ const handlers = {
   }
 }
 
+// view
 const view = {
   displayToDos() {
     const ul = document.querySelector('ul');
     ul.innerHTML = '';
-    todoList.todos.forEach(todo => {
+    todoList.todos.forEach((todo, i) => {
       const li = document.createElement('li');
+      li.id = i;
       todo.completed ?
         li.innerHTML = `(x) ${todo.todoText}` :
         li.innerHTML = `( ) ${todo.todoText}`;
+      li.appendChild(this.createDeleteButton());
       ul.appendChild(li);
+    });
+  },
+  createDeleteButton() {
+    const button = document.createElement('button');
+    button.innerHTML = 'Delete';
+    button.className = 'deleteButton';
+    return button;
+  },
+  setEventListeners() {
+    const ul = document.querySelector('ul');
+    ul.addEventListener('click', event => {
+      if (event.target.className === 'deleteButton') {
+        handlers.deleteTodo(event.target.parentNode.id);
+      }
     });
   }
 }
 
+view.setEventListeners();
 window.todoList = todoList;
 window.handlers = handlers;
+window.view = view;
